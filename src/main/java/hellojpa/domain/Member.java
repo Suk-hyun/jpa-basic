@@ -3,7 +3,9 @@ package hellojpa.domain;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -16,6 +18,9 @@ public class Member {
     private String street;
     private String zipcode;
 
+    @OneToMany(mappedBy = "member") // 예제라서 이것 만든 거고, 사실 설계상 member 에 order 가 있을 이유가 딱히 없고
+    // 이렇게 설계 한 것은 관심사를 적절히 끊어내지 못하고 잘 못 설계 한 것.
+    private List<Order> orders = new ArrayList<>(); // 관례상 nullPointException 도 방지 하기 위해서 new ArrayList() 로 초기화.
     public Long getId() {
         return id;
     }
